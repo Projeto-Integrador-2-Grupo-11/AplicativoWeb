@@ -1,0 +1,27 @@
+version: '3.6'
+
+x-variables: &variables
+  FIREBASE_API_KEY: AIzaSyCboa08hL9h2vVIKp11gvNDCgwxCyhztI4
+  FIREBASE_AUTH_DOMAIN: seletor-frutas.firebaseapp.com
+  FIREBASE_PROJECT_ID: seletor-frutas
+
+services:    
+  local-container:
+    image: fruit-selector:local
+    build:
+      context: .
+      dockerfile: docker/origin/${DOCKERFILE:-Dockerfile}
+    restart: unless-stopped
+    command: yarn run dev
+    environment:
+      *variables
+    ports:
+      - 3000:3000
+    networks:
+      - fruit-selector
+    volumes:
+      - ./src:/app
+
+networks:
+  fruit-selector:
+    name: fruit-selector
