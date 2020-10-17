@@ -38,11 +38,6 @@
            </nuxt-link>
          </li>
          <li class="nav-item">
-           <nuxt-link to="/pricing" class="nav-link">
-             <span class="nav-link-inner--text">Pricing</span>
-           </nuxt-link>
-         </li>
-         <li class="nav-item">
            <nuxt-link to="/login" class="nav-link">
              <span class="nav-link-inner--text">Login</span>
            </nuxt-link>
@@ -52,14 +47,9 @@
              <span class="nav-link-inner--text">Register</span>
            </nuxt-link>
          </li>
-         <li class="nav-item">
-           <nuxt-link to="/lock" class="nav-link">
-             <span class="nav-link-inner--text">Lock</span>
-           </nuxt-link>
-         </li>
        </ul>
        <hr class="d-lg-none">
-       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+       <!-- <ul class="navbar-nav align-items-lg-center ml-lg-auto">
          <li class="nav-item">
            <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" rel="noopener" aria-label="Facebook">
              <i class="fab fa-facebook-square"></i>
@@ -93,7 +83,7 @@
              <span class="nav-link-inner--text">Purchase now</span>
            </a>
          </li>
-       </ul>
+       </ul> -->
      </template>
     </base-nav>
 
