@@ -24,8 +24,6 @@
                             placeholder="Senha"
                             v-model="model.password">
                 </base-input>
-                <!-- <small>Esqueceu seu e-mail ou senha? </small> -->
-                <!-- <base-checkbox v-model="model.rememberMe">Remember me</base-checkbox> -->
                 <div class="text-center">
                   <base-button  @click="loginFirebase()" type="primary" class="my-4">Login</base-button>
                 </div>
@@ -59,27 +57,14 @@ import BaseButton from '~/components/Buttons/BaseButton.vue';
       return {
         model: {
           email: '',
-          password: '',
-          rememberMe: false
+          password: ''
         }
       };
     },
     methods: {
       loginFirebase(e) {
-        this.$firebaseAuth.signInWithEmailAndPassword(
-          this.model.email,
-          this.model.password
-        ).catch(function(error) {
-          // TODO: Show error on the page.
-          console.log(error.code);
-          console.log(error.message);
-        });
+        this.$store.dispatch('modules/user/logInWithEmailAndPassword', this.model);
       }
     },
   };
 </script>
-<style>
-  .login-text {
-    margin-bottom: 1rem !important;
-  }
-</style>
