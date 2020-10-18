@@ -52,7 +52,7 @@ $grays: map-merge((
 
 $blue:    #5e72e4 !default;
 $indigo:  #5603ad !default;
-$purple:  #8965e0 !default;
+$purple:  #7571F9 !default;
 $pink:    #f3a4b5 !default;
 $red:     #AC3729 !default;
 $orange:  #ff9b44 !default;
@@ -84,8 +84,8 @@ $colors: map-merge((
   "navy-blue":  $navy-blue
 ), $colors);
 
-$default:       $orange !default;
-$primary:       $gray-default !default;
+$default:       #F3F3F9 !default;
+$primary:       $purple !default;
 $secondary:     #f7fafc !default;
 $success:       $green !default;
 $info:          $teal !default;

@@ -1,33 +1,13 @@
 <template>
   <div>
-    <!-- Header -->
-    <div class="header bg-gradient-success py-7 py-lg-8 pt-lg-9">
-      <div class="container">
-        <div class="header-body text-center mb-7 login-text">
-          <div class="row justify-content-center">
-            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-              <h1 class="text-white">Seletor de Frutas</h1>
-              <p class="text-lead text-white">
-                Se você já tem uma conta, entre com seu e-mail e senha para ver os dados de sua produção.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="separator separator-bottom separator-skew zindex-100">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
-      </div>
-    </div>
     <!-- Page content -->
-    <div class="container mt--8 pb-5">
+    <div class="container py-7 py-lg-8 pt-lg-9">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
           <div class="card bg-secondary border-0 mb-0">
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
-                <small>Login</small>
+                <b>Login</b>
               </div>
               <form role="form">
                 <base-input alternative
@@ -44,8 +24,10 @@
                             placeholder="Senha"
                             v-model="model.password">
                 </base-input>
+                <!-- <small>Esqueceu seu e-mail ou senha? </small> -->
+                <!-- <base-checkbox v-model="model.rememberMe">Remember me</base-checkbox> -->
                 <div class="text-center">
-                  <base-button type="primary" class="my-4" v-on:click="loginFirebase">Login</base-button>
+                  <base-button  @click="loginFirebase()" type="primary" class="my-4">Login</base-button>
                 </div>
               </form>
             </div>
@@ -84,8 +66,7 @@ import BaseButton from '~/components/Buttons/BaseButton.vue';
     },
     methods: {
       loginFirebase(e) {
-        e.preventDefault();
-        this.$store.$firebaseAuth.signInWithEmailAndPassword(
+        this.$firebaseAuth.signInWithEmailAndPassword(
           this.model.email,
           this.model.password
         ).catch(function(error) {
