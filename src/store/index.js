@@ -11,6 +11,7 @@ export const actions = {
     if (user) {
       await commit('modules/user/SET_USER', user);
       await dispatch('modules/user/setProfile');
+      // TODO: Verify redirecting.
       redirect('/dashboard');
     } else {
       redirect('/login');

@@ -122,7 +122,7 @@
   </div>
 </template>
 <script>
-  import BaseNav  from '~/components/Layouts/BaseNav.vue';
+  import BaseNav  from '~/components/Navbar/BaseNav.vue';
 
   export default {
     components: {

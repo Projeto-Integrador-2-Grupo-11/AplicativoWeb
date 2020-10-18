@@ -45,8 +45,7 @@
                             v-model="model.password">
                 </base-input>
                 <div class="text-center">
-                  <!--<base-button type="primary" class="my-4">Login</base-button>-->
-                  <button v-on:click="teste">Login</button>
+                  <base-button type="primary" class="my-4" v-on:click="loginFirebase">Login</base-button>
                 </div>
               </form>
             </div>
@@ -65,12 +64,14 @@
   </div>
 </template>
 <script>
-import BaseInput from '~/components/Input/BaseInput.vue';
+import BaseInput from '~/components/Inputs/BaseInput.vue';
+import BaseButton from '~/components/Buttons/BaseButton.vue';
 
   export default {
     layout: 'AuthLayout',
     components:{
-      BaseInput
+      BaseInput,
+      BaseButton
     },
     data() {
       return {
@@ -82,15 +83,13 @@ import BaseInput from '~/components/Input/BaseInput.vue';
       };
     },
     methods: {
-      loginFirebase(){
-
-      },
-      teste(e) {
+      loginFirebase(e) {
         e.preventDefault();
         this.$store.$firebaseAuth.signInWithEmailAndPassword(
           this.model.email,
           this.model.password
         ).catch(function(error) {
+          // TODO: Show error on the page.
           console.log(error.code);
           console.log(error.message);
         });
