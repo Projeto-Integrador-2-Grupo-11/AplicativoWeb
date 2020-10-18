@@ -7,12 +7,13 @@ export const mutations = {};
 
 export const actions = {
   async nuxtServerInit({ dispatch, commit }, { app, redirect }) {
-    // const user = app.$cookiz.get('user');
-    // if (user) {
-    //   await commit('modules/user/SET_USER', user);
-    //   await dispatch('modules/user/setProfile');
-    // } else {
-    //   redirect('/login');
-    // }
+    const user = app.$cookiz.get('user');
+    if (user) {
+      await commit('modules/user/SET_USER', user);
+      await dispatch('modules/user/setProfile');
+      redirect('/dashboard');
+    } else {
+      redirect('/login');
+    }
   },
 };

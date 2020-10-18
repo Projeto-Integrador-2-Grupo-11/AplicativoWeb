@@ -26,7 +26,8 @@
           class="navbar-collapse navbar-custom-collapse collapse show"
           :class="menuClasses"
           v-show="show"
-          v-click-outside="closeMenu">
+          v-click-outside="closeMenu"
+        >
           <slot :close-menu="closeMenu"></slot>
         </div>
     </div>

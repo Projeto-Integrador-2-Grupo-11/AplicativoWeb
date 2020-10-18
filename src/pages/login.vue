@@ -13,7 +13,7 @@
                 <base-input alternative
                             class="mb-3"
                             prepend-icon="ni ni-email-83"
-                            placeholder="Email"
+                            placeholder="E-mail"
                             v-model="model.email">
                 </base-input>
 
@@ -21,20 +21,23 @@
                             class="mb-3"
                             prepend-icon="ni ni-lock-circle-open"
                             type="password"
-                            placeholder="Password"
+                            placeholder="Senha"
                             v-model="model.password">
                 </base-input>
-                <small>Esqueceu seu e-mail ou senha? </small>
+                <!-- <small>Esqueceu seu e-mail ou senha? </small> -->
                 <!-- <base-checkbox v-model="model.rememberMe">Remember me</base-checkbox> -->
                 <div class="text-center">
-                  <base-button type="primary" class="my-4">Sign in</base-button>
+                  <base-button  @click="loginFirebase()" type="primary" class="my-4">Login</base-button>
                 </div>
               </form>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-6">
-              <nuxt-link to="/register" class="text-light"><small>Criar conta</small></nuxt-link>
+              <nuxt-link to="/dashboard" class="text-light"><small>Esqueceu a senha?</small></nuxt-link>
+            </div>
+            <div class="col-6 text-right">
+              <nuxt-link to="/register" class="text-light"><small>Criar uma nova conta</small></nuxt-link>
             </div>
           </div>
         </div>
@@ -62,9 +65,20 @@ import BaseButton from '~/components/Buttons/BaseButton.vue';
       };
     },
     methods: {
-      loginFirebase(){
-
+      loginFirebase(e) {
+        this.$firebaseAuth.signInWithEmailAndPassword(
+          this.model.email,
+          this.model.password
+        ).catch(function(error) {
+          console.log(error.code);
+          console.log(error.message);
+        });
       }
     },
   };
 </script>
+<style>
+  .login-text {
+    margin-bottom: 1rem !important;
+  }
+</style>
