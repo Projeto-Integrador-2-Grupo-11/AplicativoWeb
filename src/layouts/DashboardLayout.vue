@@ -28,6 +28,7 @@
       </template>
     </side-bar>
     <div class="main-content">
+      <dashboard-navbar :type="$route.name === 'alternative' ? 'light': 'default'"></dashboard-navbar>
       <div @click="$sidebar.displaySidebar(false)">
         <nuxt></nuxt>
       </div>
