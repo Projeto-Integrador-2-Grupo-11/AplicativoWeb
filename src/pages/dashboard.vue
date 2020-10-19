@@ -3,6 +3,7 @@
 </template>
 <script>
   export default {
+    layout: 'DashboardLayout',
     methods: {
       logout(e) {
         e.preventDefault();

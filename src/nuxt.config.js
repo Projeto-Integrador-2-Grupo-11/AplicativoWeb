@@ -95,7 +95,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    // '~/plugins/dashboard/dashboard-plugin',
+    '~/plugins/dashboard-plugin',
     { src: '~/plugins/axios', ssr: true },
     // {src: '~/plugins/dashboard/full-calendar', ssr: false },
     // {src: '~/plugins/dashboard/world-map', ssr: false },
