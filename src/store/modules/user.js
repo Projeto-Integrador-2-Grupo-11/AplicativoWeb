@@ -50,6 +50,11 @@ export const actions = {
       .createUserWithEmailAndPassword(payload.email, payload.password)
       .then(() => {
         // TODO: Create collections related to user on firebase.
+        var user = this.$firebaseAuth.currentUser;
+        user.updateProfile({
+          displayName: payload.name,
+        });
+        
         dispatch('register');
       })
       .catch((error) => {
@@ -95,6 +100,8 @@ export const actions = {
     if (payload !== null) {
       this.$cookiz.set('user', payload, { maxAge: 60 * 60 * 5, path: '/' });
     }
+
+    console.log('user ' + JSON.stringify(payload));
     commit('SET_USER', payload);
   },
 };
