@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 export default ({ app }, inject) => {
   if (!firebase.apps.length) {
@@ -11,4 +12,5 @@ export default ({ app }, inject) => {
   }
 
   inject('firebaseAuth', firebase.auth());
+  inject('firestore', firebase.firestore());
 };

@@ -42,6 +42,14 @@ export const mutations = {
 export const actions = {
 
   register({ dispatch }, payload) {
+    const userRef = this.$firestore.collection('users').doc(payload.machineId);
+
+    userRef.set({
+      name: payload.name,
+      email: payload.email,
+      machine_id: payload.machineId
+    });
+
     return location.reload();
   },
 
@@ -49,13 +57,12 @@ export const actions = {
     return this.$firebaseAuth
       .createUserWithEmailAndPassword(payload.email, payload.password)
       .then(() => {
-        // TODO: Create collections related to user on firebase.
-        var user = this.$firebaseAuth.currentUser;
+        let user = this.$firebaseAuth.currentUser;
         user.updateProfile({
           displayName: payload.name,
-        });
+        }); 
         
-        dispatch('register');
+        dispatch('register', payload);
       })
       .catch((error) => {
         throw error;
