@@ -1,7 +1,20 @@
 <template>
   <div>
-    <div class="col-12 mt-3 row">
-      <div class="col-4">
+    <label for="example-date-input" class="col-md-12 center mt-3 col-form-label form-control-label">Selecione o período que deseja visualizar</label>
+    <form class="col-12 mt-4 center">
+      <div class="form-group row">
+        <label for="example-date-input" class="col-md-1 col-form-label form-control-label">Período Inicial</label>
+        <div class="col-md-3">
+          <base-input type="date" value="2018-11-23" id="example-date-input"/>
+        </div>
+        <label for="example-date-input" class="col-md-1 col-form-label form-control-label">Período Final</label>
+        <div class="col-md-3">
+          <base-input type="date" value="2018-11-23" id="example-date-input"/>
+        </div>
+      </div>
+    </form>
+    <div class="col-12 mt-6 row">
+      <div class="col-md-4 col-sm-12">
         <StatsCard class="bg-orange">
           <div class="row">
             <div class="col">
@@ -14,7 +27,7 @@
           </p>
         </StatsCard>
       </div>
-      <div class="col-4">
+      <div class="col-md-4 col-sm-12">
         <StatsCard class="bg-purple-card">
           <div class="row">
             <div class="col">
@@ -27,7 +40,7 @@
           </p>
         </StatsCard>
       </div>
-      <div class="col-4">
+      <div class="col-md-4 col-sm-12">
         <StatsCard class="bg-pink">
           <div class="row">
             <div class="col">
@@ -41,13 +54,15 @@
         </StatsCard>
       </div>
     </div>
-    <Card class="bg-white">
-      <div class="row col-12">
-        <div class=" col-8">
+    <!-- <hr class="v-line"> -->
+    <Card class="bg-white col-11 center">
+      <h5 class="card-title text-uppercase text-muted mb-0 ">Subclassificações das Laranjas Boas</h5>
+      <div class="row mt-3 col-12">
+        <div class="col-md-8 col-sm-12">
           <StatsCard class="bg-green">
             <div class="row">
               <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0 text-white">Total de Laranjas SEM Imperfeições </h5>
+                <h5 class="card-title text-uppercase text-muted mb-0 text-white">Total de Laranjas SEM Mancha </h5>
                 <span class="h2 font-weight-bold mb-0 text-white">4.000</span>
               </div>
             </div>
@@ -64,11 +79,11 @@
             </div>
           </StatsCard>
         </div>
-        <div class=" col-4"> 
+        <div class="col-md-4 col-sm-12"> 
           <StatsCard class="bg-yellow">
             <div class="row">
               <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0 text-white">Total de Laranjas COM Imperfeições</h5>
+                <h5 class="card-title text-uppercase text-muted mb-0 text-white">Total de Laranjas COM Mancha</h5>
                 <span class="h2 font-weight-bold mb-0 text-white">4.000</span>
               </div>
             </div>
@@ -79,8 +94,9 @@
   </div>
 </template>
 <script>
-  import StatsCard from '@/components/Cards/StatsCard'
-  import Card from '@/components/Cards/Card'
+  import StatsCard from '@/components/Cards/StatsCard';
+  import Card from '@/components/Cards/Card';
+  import BaseInput from '@/components/Inputs/BaseInput';
 
   export default {
     layout: 'DashboardLayout',
@@ -88,7 +104,14 @@
     },
     components:{
       StatsCard,
-      Card
+      Card,
+      BaseInput
     }
   }
 </script>
+<style scoped>
+/* .v-line{
+  transform: rotate(90deg); 
+  width: 116px; 
+}  */
+</style>
