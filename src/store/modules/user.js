@@ -11,7 +11,7 @@ export const getters = {
     (state.profile && state.profile.avatar_path) || state.user.photoURL || '/Profile_default.png',
 
   
-  machineId: (state) => state.profile.machineId,
+  machineId: (state) => state.machineId,
   
   loggedUser: (state) => state.user,
   
@@ -40,6 +40,10 @@ export const mutations = {
   SET_PROFILE(state, payload) {
     state.profile = payload;
   },
+
+  SET_MACHINE_ID(state, payload) {
+    state.machineId = payload;
+  }
 };
 
 export const actions = {
@@ -96,6 +100,7 @@ export const actions = {
     this.$cookiz.removeAll();
     this.$firebaseAuth.signOut();
     commit('SET_USER', null);
+    commit('SET_MACHINE_ID', null);
     location.reload();
   },
   
@@ -104,6 +109,7 @@ export const actions = {
     this.$cookiz.removeAll();
     commit('SET_USER', null);
     commit('SET_PROFILE', null);
+    commit('SET_MACHINE_ID', null);
   },
   
   setUser({ commit }, payload) {
@@ -115,8 +121,8 @@ export const actions = {
     commit('SET_USER', payload);
   },
 
-  async setProfile({ commit }, user) {
-    let profile = null;
+  async setMachineId({ commit }, user) {
+    let machineId = null;
 
     if(user) {
       let usersRef = this.$firestore.collection('users');
@@ -124,23 +130,16 @@ export const actions = {
       let snapshot = await query.get();
 
       if(!snapshot || snapshot.empty || snapshot.size > 1)
-        throw "Não foi possível recuperar o ID da máquina";
+        throw "Erro ao recuperar o ID da máquina.";
       
-      let machineId;
       snapshot.forEach(doc => {
         machineId = doc.data().machine_id;
       });
-  
-      profile = { 
-        avatar_path: user.photoURL, 
-        machineId: machineId
-      }
     }
 
-    this.$cookiz.set('profile', profile);
+    this.$cookiz.set('machineId', machineId);
 
-    console.log('profile ' + JSON.stringify(profile));
-    commit('SET_PROFILE', profile);
+    commit('SET_MACHINE_ID', machineId);
   },
 };
 
