@@ -9,6 +9,9 @@ export const getters = {
   
   userProfileImage: (state) =>
     (state.profile && state.profile.avatar_path) || state.user.photoURL || '/Profile_default.png',
+
+  
+  machineId: (state) => state.profile.machineId,
   
   loggedUser: (state) => state.user,
   
@@ -110,6 +113,34 @@ export const actions = {
 
     console.log('user ' + JSON.stringify(payload));
     commit('SET_USER', payload);
+  },
+
+  async setProfile({ commit }, user) {
+    let profile = null;
+
+    if(user) {
+      let usersRef = this.$firestore.collection('users');
+      let query = usersRef.where('email', '==', user.email);
+      let snapshot = await query.get();
+
+      if(!snapshot || snapshot.empty || snapshot.size > 1)
+        throw "Não foi possível recuperar o ID da máquina";
+      
+      let machineId;
+      snapshot.forEach(doc => {
+        machineId = doc.data().machine_id;
+      });
+  
+      profile = { 
+        avatar_path: user.photoURL, 
+        machineId: machineId
+      }
+    }
+
+    this.$cookiz.set('profile', profile);
+
+    console.log('profile ' + JSON.stringify(profile));
+    commit('SET_PROFILE', profile);
   },
 };
 

@@ -10,9 +10,8 @@ export const actions = {
     const user = app.$cookiz.get('user');
     if (user) {
       await commit('modules/user/SET_USER', user);
-      // TODO: Add setProfile on modules/user.
-      await dispatch('modules/user/setProfile');
-      redirect('/dashboard'); // Verify this redirect.
+      await dispatch('modules/user/setProfile', user);
+      redirect('/dashboard');
     } else {
       redirect('/login');
     }
