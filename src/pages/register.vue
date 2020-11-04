@@ -76,9 +76,24 @@ export default {
   },
   methods: {
       registerFirebase(e) {
-        this.$store.dispatch('modules/user/registerWithEmailAndPassword', this.model);
+        const usersRef = this.$firestore.collection('users').doc(this.model.machineId);
+
+      usersRef.get()
+        .then(doc => {
+          if (!doc.exists) {
+            this.$store.dispatch(
+              'modules/user/registerWithEmailAndPassword', 
+              this.model
+            );
+          } else {
+            alert("Já existe uma conta cadastrada para o ID informado!");
+          }
+        })
+        .catch(err => {
+          console.log('Error', err);
+        });
       }
-    },
+    }
 };
 </script>
 <style></style>

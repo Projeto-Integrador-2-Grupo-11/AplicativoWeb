@@ -9,6 +9,9 @@ export const getters = {
   
   userProfileImage: (state) =>
     (state.profile && state.profile.avatar_path) || state.user.photoURL || '/Profile_default.png',
+
+  
+  machineId: (state) => state.machineId,
   
   loggedUser: (state) => state.user,
   
@@ -37,11 +40,23 @@ export const mutations = {
   SET_PROFILE(state, payload) {
     state.profile = payload;
   },
+
+  SET_MACHINE_ID(state, payload) {
+    state.machineId = payload;
+  }
 };
 
 export const actions = {
 
   register({ dispatch }, payload) {
+    const userRef = this.$firestore.collection('users').doc(payload.machineId);
+
+    userRef.set({
+      name: payload.name,
+      email: payload.email,
+      machine_id: payload.machineId
+    });
+
     return location.reload();
   },
 
@@ -49,13 +64,12 @@ export const actions = {
     return this.$firebaseAuth
       .createUserWithEmailAndPassword(payload.email, payload.password)
       .then(() => {
-        // TODO: Create collections related to user on firebase.
-        var user = this.$firebaseAuth.currentUser;
+        let user = this.$firebaseAuth.currentUser;
         user.updateProfile({
           displayName: payload.name,
-        });
+        }); 
         
-        dispatch('register');
+        dispatch('register', payload);
       })
       .catch((error) => {
         throw error;
@@ -86,6 +100,7 @@ export const actions = {
     this.$cookiz.removeAll();
     this.$firebaseAuth.signOut();
     commit('SET_USER', null);
+    commit('SET_MACHINE_ID', null);
     location.reload();
   },
   
@@ -94,6 +109,7 @@ export const actions = {
     this.$cookiz.removeAll();
     commit('SET_USER', null);
     commit('SET_PROFILE', null);
+    commit('SET_MACHINE_ID', null);
   },
   
   setUser({ commit }, payload) {
@@ -103,6 +119,27 @@ export const actions = {
 
     console.log('user ' + JSON.stringify(payload));
     commit('SET_USER', payload);
+  },
+
+  async setMachineId({ commit }, user) {
+    let machineId = null;
+
+    if(user) {
+      let usersRef = this.$firestore.collection('users');
+      let query = usersRef.where('email', '==', user.email);
+      let snapshot = await query.get();
+
+      if(!snapshot || snapshot.empty || snapshot.size > 1)
+        throw "Erro ao recuperar o ID da máquina.";
+      
+      snapshot.forEach(doc => {
+        machineId = doc.data().machine_id;
+      });
+    }
+
+    this.$cookiz.set('machineId', machineId);
+
+    commit('SET_MACHINE_ID', machineId);
   },
 };
 
