@@ -20,7 +20,7 @@
 .form-control {
     font-size: $input-btn-font-size;
     @include transition($transition-ease-in-out);
-    height:  36px;
+    height:  40px;
     border-color: #f8f6f4;
 
     &:focus {
