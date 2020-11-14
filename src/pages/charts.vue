@@ -25,7 +25,7 @@
           </select>
         </base-input> 
          <div v-if="period == 1" class="col-md-2">
-          <base-button @click="changePeriod()" type="primary" class="my-0">Aplicar</base-button>
+          <base-button :loading="loading" @click="changePeriod()" type="primary" class="my-0">Aplicar</base-button>
         </div>   
       </div>
       <div class=" row">
@@ -78,20 +78,19 @@
             </base-input>
           </div>
        <div v-if="period != 1" class="col-md-3">
-          <base-button @click="changePeriod()" type="primary" class="my-0">Aplicar</base-button>
+          <base-button :loading="loading" @click="changePeriod()" type="primary" class="my-0">Aplicar</base-button>
         </div>
       </div>
     </form>
     <div class="col-12 mt-6 center">
       <card>
         <template slot="header">
-          <!-- Subtitle -->
-          <!-- <h6 class="surtitle">Overview</h6> -->
-          <!-- Title -->
           <h5 class="h3 mb-0">Informações das laranjas</h5>
         </template>
         <div class="chart-area">
+          <i v-if="loading" class="fas fa-spinner fa-spin"></i>
           <bar-chart
+            v-if="!loading"
             :height="350"
             :chart-data="barChartStacked.chartData"
             :extra-options="barChartStacked.extraOptions"
@@ -165,6 +164,8 @@
         this.arraySmallOranges.length = 0;
         this.arrayOrangesWithSpots.length = 0;
         var period = [];
+        this.loading = true;
+        
         if(this.period == 1){
           for(let i = 0; i < 12; i++){
             var firstDay = new Date(this.currentYear, i, 1);
@@ -193,7 +194,7 @@
             await this.getOrangesBySize(firstDay, lastDay);
           }
         }
-        console.log(this.quantity);
+        
         var obj = {
             labels: period,
             datasets: [{
@@ -211,8 +212,8 @@
               data: this.quantity == 2 ? this.arraySmallOranges : ''
             }]
           }
-          console.log(obj);
         this.barChartStacked.chartData = Object.assign({}, this.barChartStacked.chartData, obj);
+        this.loading = false;
       },
       getOranges: async function(firstDate, lastDate) {
         const machineId = parseInt(this.$cookiz.get('machineId'));
@@ -315,6 +316,7 @@
         period: 1,
         startDate: '',
         endDate: '',
+        loading: false,
         months: [
           {
             text: 'Janeiro',
@@ -453,6 +455,10 @@
   }
 </script>
 <style scoped>
+.fa-spinner{
+  font-size: 60px;
+  margin-left: 50%;
+}
 /* .v-line{
   transform: rotate(90deg); 
   width: 116px; 
