@@ -29,7 +29,7 @@
         </div>   
       </div>
       <div class=" row">
-        <label  v-if="period == 2" for="example-date-input" class="col-md-1 col-form-label form-control-label">Ano Inicial</label>
+        <label  v-if="period == 2" for="example-date-input" class="col-md-2 col-form-label form-control-label">Ano Inicial</label>
         <div  v-if="period == 2" class="col-md-2">
           <base-input>
             <select  v-model="initialYear" class="form-control" id="period-label">
@@ -41,7 +41,7 @@
             </select>
           </base-input>
         </div>
-        <label  v-if="period == 2" for="example-date-input" class="col-md-1 col-form-label form-control-label">Ano Final</label>
+        <label  v-if="period == 2" for="example-date-input" class="col-md-2 col-form-label form-control-label">Ano Final</label>
           <div  v-if="period == 2" class="col-md-2">
             <base-input>
               <select  v-model="finalYear" class="form-control" id="period-label">
@@ -53,7 +53,7 @@
               </select>
             </base-input>
           </div>
-          <label  v-if="period == 3" for="example-date-input" class="col-md-1 col-form-label form-control-label">Mês</label>
+          <label  v-if="period == 3" for="example-date-input" class="col-md-2 col-form-label form-control-label">Mês</label>
           <div  v-if="period == 3" class="col-md-2">
             <base-input>
               <select  v-model="selectedMonth" class="form-control" id="period-label">
@@ -65,7 +65,7 @@
               </select>
             </base-input>
           </div>
-          <label  v-if="period == 3" for="example-date-input" class="col-md-1 col-form-label form-control-label">Ano</label>
+          <label  v-if="period == 3" for="example-date-input" class="col-md-2 col-form-label form-control-label">Ano</label>
           <div  v-if="period == 3" class="col-md-2">
             <base-input>
               <select  v-model="yearMonth" class="form-control" id="period-label">
