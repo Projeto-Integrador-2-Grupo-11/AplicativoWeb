@@ -24,7 +24,11 @@ export const Charts = {
       'info': '#11cdef',
       'success': '#2dce89',
       'danger': '#f5365c',
-      'warning': '#fb6340'
+      'warning': '#fb6340',
+      'orange': '#FFA56A',
+      'yellow': '#FFDA13',
+      'green': '#46D459',
+      'pink': '#FF83A2'
     },
     black: '#12263F',
     white: '#FFFFFF',
