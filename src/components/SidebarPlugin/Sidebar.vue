@@ -5,8 +5,8 @@
        :data="backgroundColor">
     <div class="scrollbar-inner" ref="sidebarScrollArea">
       <div class="sidenav-header d-flex align-items-center">
-        <a class="navbar-brand" href="#">
-          <img src="/logo.svg" class="navbar-brand-img" alt="Sidebar logo">
+        <a class="navbar-brand select-orange" href="#">
+          <!-- <img src="/orange.jpg" class="navbar-brand-img" alt="Sidebar logo"> -->
         </a>
         <div class="ml-auto">
           <!-- Sidenav toggler -->
@@ -122,3 +122,10 @@ export default {
   }
 };
 </script>
+ 
+ <style scoped>
+ .select-orange{
+   font-family: ;
+ }
+
+ </style>

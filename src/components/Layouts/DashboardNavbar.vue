@@ -2,7 +2,7 @@
   <base-nav
     container-classes="container-fluid"
     class="navbar-top border-bottom navbar-expand"
-    :class="{'bg-default navbar-dark': type === 'default'}"
+    :class="{'bg-purple navbar-dark': type === 'default'}"
   >
     <ul class="navbar-nav align-items-center ml-md-auto">
       <base-dropdown menu-on-right
@@ -26,10 +26,10 @@
           <div class="dropdown-header noti-title">
             <h6 class="text-overflow m-0">Bem-vindo!</h6>
           </div>
-          <a @click="goProfile()" class="dropdown-item">
+          <!-- <a @click="goProfile()" class="dropdown-item">
             <i class="ni ni-single-02"></i>
             <span>Perfil</span>
-          </a>
+          </a> -->
           <div class="dropdown-divider"></div>
           <a @click="logOut()" class="dropdown-item">
             <i class="ni ni-user-run"></i>
