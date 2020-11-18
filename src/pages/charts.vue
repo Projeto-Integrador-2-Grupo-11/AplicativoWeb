@@ -136,6 +136,7 @@
       }
     },
     async mounted() {
+      this.loading = true;
       for(let i = 0; i < 12; i++){
         var firstDay = new Date(this.currentYear, i, 1);
         var lastDay = new Date(this.currentYear, i + 1, 0);
@@ -154,6 +155,7 @@
             }]
           }
         this.barChartStacked.chartData = Object.assign({}, this.barChartStacked.chartData, obj);
+      this.loading = false;
     },
     methods:{
       async changePeriod(){
@@ -284,7 +286,7 @@
         } else {
           query = qtOrangesRef
               .where('machine_id', '==', machineId)
-              .where('date', '>=', startDate);
+              .where('date', '==', startDate);
         }
 
         let snapshot = await query.get();
