@@ -114,9 +114,6 @@
     layout: 'DashboardLayout',
     methods: {
       changeDateRange() {
-        console.log(this.model.startDate);
-        console.log(this.model.endDate);
-
         if(this.model.startDate.length == 10 && this.model.endDate.length == 10){
           this.getOranges();
           this.getOrangesBySize();
@@ -153,6 +150,7 @@
               case "good_spotless": {
                 goodOranges++;
                 goodOrangesSpotless++;
+                console.log(goodOrangesSpotless);
               }
               case "bad": {
                 badOranges++;
@@ -195,7 +193,7 @@
         this.smallOranges = smallOranges;
         this.mediumOranges = mediumOranges;
         this.largeOranges = largeOranges;
-
+        this.goodOrangesSpotless = smallOranges + mediumOranges + largeOranges;
       }
     },
     components:{
